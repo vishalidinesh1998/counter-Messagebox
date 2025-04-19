@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Message Box</title>
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-blue-500 ">
+
+  <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md text-center">
+    <textarea
+      id="myTextarea"
+      rows="5"
+      placeholder="Type your message..."
+      class="w-full p-4 border border-gray-300 shadow-lg rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-blue-400"
+    ></textarea>
+    
+    <p class="mt-2 text-gray-600 text-sm">
+      <span id="charCount">0</span>/200 max characters
+    </p>
+
+    <p id="warning" class="mt-2 text-red-500 text-sm hidden">Character limit reached!</p>
+  </div>
+  <script>
+    const textarea = document.getElementById("myTextarea");
+    const charCount = document.getElementById("charCount");
+    const warning = document.getElementById("warning");
+    const maxChars = 200;
+
+    textarea.addEventListener("input", () => {
+      let text = textarea.value;
+
+      if (text.length > maxChars) {
+        textarea.value = text.substring(0, maxChars); // trim extra characters
+        warning.classList.remove("hidden");
+      } else {
+        warning.classList.add("hidden");
+      }
+
+      charCount.textContent = textarea.value.length;
+    });
+  
+  </script>
+
+
+</html>
